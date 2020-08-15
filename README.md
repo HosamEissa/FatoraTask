@@ -36,6 +36,7 @@ Del :localhost:3000/api/products/1 ----> delete Product whose id = 1<br>
 
 Get :localhost:3000/api/providers ----> get all providers<br>
 Post :localhost:3000/api/providers ----> create Provider  //needs body<br>
+Post :localhost:3000/api/providers/addProduct/3 ----> add record in ProductProvider table whos providerId = 3   //needs body<br>
 Get :localhost:3000/api/providers/1 ----> get Provider whose id = 1 <br>
 Put :localhost:3000/api/providers/1 ----> update Provider whose id = 1 //needs body<br>
 Del :localhost:3000/api/providers/1 ----> delete Provider whose id = 1<br>
