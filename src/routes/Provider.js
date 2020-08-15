@@ -45,8 +45,7 @@ router.put("/:id", async (req, res) => {
 	try {
 		const provider = await Provider.findByPk(req.params.id);
 		if (!provider) return res.status(404).send({ Message: "Provider Not Found" });
-		provider.name = req.body.name;
-		provider.parent_id = req.parent_id;
+		if (req.body.id) provider.name = req.body.name;
 		await provider.save();
 		return res.send({ provider });
 	} catch (error) {

@@ -46,8 +46,8 @@ router.put("/:id", async (req, res) => {
 	try {
 		const category = await Category.findByPk(req.params.id);
 		if (!category) return res.status(404).send({ Message: "Category Not Found" });
-		category.name = req.body.name;
-		category.parent_id = req.parent_id;
+		if (req.body.name) category.name = req.body.name;
+		if (req.body.parent_id) category.parent_id = req.parent_id;
 		await category.save();
 		return res.send({ category });
 	} catch (error) {
