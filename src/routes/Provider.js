@@ -1,6 +1,8 @@
 const express = require("express");
 const Provider = require("../models/Provider");
 const getPagination = require("../middleware/Pagging");
+const ProductsProvider = require("../models/Product_Provider");
+const Product = require("../models/Product");
 
 const router = new express.Router();
 
@@ -42,6 +44,26 @@ router.post("/", async (req, res) => {
 		});
 		provider.save();
 		return res.send({ provider });
+	} catch (error) {
+		return res.status(500).send(error);
+	}
+});
+router.post("/addProduct/:id", async (req, res) => {
+	try {
+		const provider = await Provider.findByPk(req.params.id);
+		console.log(provider);
+		const product = await Product.findByPk(req.body.productId);
+		if (!provider) return res.status(404).send({ Message: "Provider Not Found" });
+		if (!product) return res.status(404).send({ Message: "Product Not Found" });
+		const productsProvider = await ProductsProvider.create({
+			ProductId: req.body.productId,
+			ProviderId: req.params.id,
+			available: req.body.available,
+			price: req.body.price
+		});
+		await productsProvider.save();
+
+		return res.send({ productsProvider });
 	} catch (error) {
 		return res.status(500).send(error);
 	}
