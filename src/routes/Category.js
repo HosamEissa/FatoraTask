@@ -1,11 +1,17 @@
 const express = require("express");
 const Category = require("../models/Category");
+const getPagination = require("../middleware/Pagging");
+
 const router = new express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", getPagination, async (req, res) => {
 	try {
+		const { limit, offset } = req.pagging;
+
 		const categories = await Category.findAll({
-			attributes: ["id", "name"]
+			attributes: ["id", "name"],
+			limit,
+			offset
 		});
 
 		return res.send({ categories });

@@ -1,12 +1,17 @@
 const express = require("express");
 const Provider = require("../models/Provider");
+const getPagination = require("../middleware/Pagging");
 
 const router = new express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", getPagination, async (req, res) => {
 	try {
+		const { limit, offset } = req.pagging;
+
 		const providers = await Provider.findAll({
-			attributes: ["id", "name"]
+			attributes: ["id", "name"],
+			limit,
+			offset
 		});
 		return res.send({ providers });
 	} catch (error) {

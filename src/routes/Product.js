@@ -1,11 +1,17 @@
 const express = require("express");
 const Product = require("../models/Product");
+const getPagination = require("../middleware/Pagging");
+
 const router = new express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", getPagination, async (req, res) => {
 	try {
+		const { limit, offset } = req.pagging;
+
 		const products = await Product.findAll({
-			attributes: ["id", "name", "image_url", "category_id", "isFeatured"]
+			attributes: ["id", "name", "image_url", "category_id", "isFeatured"],
+			limit,
+			offset
 		});
 
 		return res.send({ products });
