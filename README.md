@@ -46,6 +46,6 @@ Get : localhost:3000/api/tasks/categoryProducts/1?limit=2&page=2---->(Pagging ap
 Put : localhost:3000/api/tasks/featureproduct/1 ----> Change Product whose id =1 feature state //needs body<br>
 
 
-To run the database migration and seeds using sequelize-cli
-1 - sequelize db:migrate
+To run the database migration and seeds using sequelize-cli<br>
+1 - sequelize db:migrate<br>
 2 - sequelize db:seed:all
