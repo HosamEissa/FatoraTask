@@ -13,7 +13,8 @@ used modules :
 <br>
 3-"mysql2": "^2.1.0"
 <br>
-4-"sequelize": "^6.3.4"
+4-"sequelize": "^6.3.4"<br>
+5-"sequelize-cli"
 
 node version  is v12.16.1
 
@@ -43,3 +44,8 @@ Del :localhost:3000/api/providers/1 ----> delete Provider whose id = 1<br>
 Get : localhost:3000/api/tasks/categoryProducts/1----> get Products for Category whose id = 1<br>
 Get : localhost:3000/api/tasks/categoryProducts/1?limit=2&page=2---->(Pagging applied) get Products for Category whose id = 1 gets only 2 products in the second page<br>
 Put : localhost:3000/api/tasks/featureproduct/1 ----> Change Product whose id =1 feature state //needs body<br>
+
+
+To run the database migration and seeds using sequelize-cli
+1 - sequelize db:migrate
+2 - sequelize db:seed:all
