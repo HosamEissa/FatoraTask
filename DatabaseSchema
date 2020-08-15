@@ -1,0 +1,47 @@
+CREATE DATABASE fatora_task;
+
+CREATE TABLE `categories` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `parent_id` int DEFAULT NULL,
+  `createdAt` datetime DEFAULT NULL,
+  `updatedAt` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `parent_id` (`parent_id`),
+  CONSTRAINT `categories_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `categories` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ;
+
+CREATE TABLE `providers` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `createdAt` datetime DEFAULT NULL,
+  `updatedAt` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ;
+
+CREATE TABLE `products` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `image_url` varchar(255) DEFAULT NULL,
+  `category_id` int NOT NULL,
+  `isFeatured` tinyint(1) NOT NULL DEFAULT '0',
+  `createdAt` datetime DEFAULT NULL,
+  `updatedAt` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `category_id` (`category_id`),
+  CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ;
+
+
+CREATE TABLE `product_providers` (
+  `ProviderId` int NOT NULL,
+  `ProductId` int NOT NULL,
+  `available` tinyint(1) NOT NULL DEFAULT '0',
+  `price` double NOT NULL DEFAULT '0',
+  `createdAt` datetime DEFAULT NULL,
+  `updatedAt` datetime DEFAULT NULL,
+  PRIMARY KEY (`ProviderId`,`ProductId`),
+  KEY `ProductId` (`ProductId`),
+  CONSTRAINT `product_providers_ibfk_1` FOREIGN KEY (`ProviderId`) REFERENCES `providers` (`id`),
+  CONSTRAINT `product_providers_ibfk_2` FOREIGN KEY (`ProductId`) REFERENCES `products` (`id`)
+) 
