@@ -5,7 +5,7 @@ const router = new express.Router();
 router.get("/", async (req, res) => {
 	try {
 		const products = await Product.findAll({
-			attributes: ["id", "name", "image_url", "category_id"]
+			attributes: ["id", "name", "image_url", "category_id", "isFeatured"]
 		});
 
 		return res.send({ products });
@@ -18,7 +18,7 @@ router.get("/:id", async (req, res) => {
 	try {
 		const product = await Product.findOne({
 			where: { id: req.params.id },
-			attributes: ["id", "name", "image_url", "category_id"]
+			attributes: ["id", "name", "image_url", "category_id", "isFeatured"]
 		});
 		if (!product) {
 			return res.status(404).send({ Message: "Product Not Found" });
