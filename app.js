@@ -17,6 +17,9 @@ app.use("/api/providers", providerRouter);
 app.use("/api/products", productRouter);
 app.use("/api/tasks", taskEndPointsRouter);
 
+
+
+
 app.get("/", (req, res) => {
 	res.send("Welcome Home");
 });
